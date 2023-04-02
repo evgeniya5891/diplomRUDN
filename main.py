@@ -130,7 +130,7 @@ def overlappoints_random_search(x0):
     write(100, '(f12.8,1x)') rho_y(Psi(xknext) + a, Phi(xknext))
     write(110, '(f20.8,1x)') xknext
 
-    xk = 165.108680209104#почему это число?
+    xk = 165.108680209104 #почему это число?
 
     write(*, '(1a,f12.8)') 'The approx distance: ', rho_y(Psi(xk) + a, Phi(xk))
 
