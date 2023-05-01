@@ -2,21 +2,27 @@
 import numpy as np
 
 c1 = [3, 5, 6, 8] # n мерные вектора можно поменять цифры
-c2 = [2, 5 ,8 ,1]
+c2 = [2, 9 ,8 ,1]
+
+c1 = np.array(c1)
+c2 = np.array(c2)
 
 x = [3, 5, 6, 8]
 y = [2, 5 ,8 ,1]
 
 x = np.array(x)
 y = np.array(y)
+
+
 p = [3, 5, 6, 8] #вектор
 n = 10
+# m <= n m - длинна векторов D и S
 gamma = [3, 5, 6, 8] #гамма вектор переименовать
 a = 1000 # не нашли описание
 b = 1
 
 p = np.array(p)
-gamma = np.array(np.array(p))
+gamma = np.array(gamma)
 def rhu_y(x,y):#Критерий нашей проверки (7) в статье 02,04,2023
     rhu_y = max(abs(x - y))
     return rhu_y
@@ -25,7 +31,7 @@ print(rhu_y(x,y))
 
 
 def rhu_x(x,y):#Критерий нашей проверки (7) в статье 02,04,2023
-    rhu_x = 2 * max((abs(x - y)) / (c2 - c1)) # c2 - c1 максимальная и минимальная возможная цена
+    rhu_x = 2 * max(abs(x - y))/(c2 - c1) # c2 - c1 максимальная и минимальная возможная цена
     return rhu_x
 
 print(rhu_x(x,y))
