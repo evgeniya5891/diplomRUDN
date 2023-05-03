@@ -95,3 +95,13 @@ def ALFA():
     return w
 
 print(ALFA())
+
+def BETA():
+    a = (n + 1) / n * max(c2) * max(c1**float(-2)) * (max(f2()))**float(-1) * np.dot(gamma,c1) - (((n + 1) / 2*b**2) * min(f1()))
+    return a
+print(BETA())
+
+if GAMMA() < ALFA() - BETA():
+    print ('модель удовлетворяет условиям')
+else:
+    print('модель НЕ удовлетворяет условиям')

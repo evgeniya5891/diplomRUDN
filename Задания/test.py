@@ -91,7 +91,9 @@ def f6():
         a = min(abs(gamma[number]) - ((number + 1) * c2)**float(-1) * np.dot(gamma,c1))
         result = result + a
     return result
-print(f6())
 
 
 def BETA():
+    a = (n + 1) / n * max(c2) * max(c1**float(-2)) * (max(f2()))**float(-1) * np.dot(gamma,c1) - (((n + 1) / 2*b**2) * min(f1()))
+    return a
+print(BETA())
