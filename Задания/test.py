@@ -85,12 +85,13 @@ def f5():
     list2 = np.array(list2)
     return list2
 
-def GAMMA():
-    list2 = []
-    for number in range(1,n+1):
-        w = abs((number*(f4()[number-1])**float(-1)) * np.dot(gamma,f4())) - ((a + b**2)*f4()[number-1]) / b * (a**2 + b**2)**1/2 * (np.dot(f4(),f4()))**float(-1/2) + 1/number**float(-1/2)
-        list2.append(w)
-    list2 = np.array(list2)
-    return max(list2)
+def f6():
+    result = 0
+    for number in range(0,n):
+        a = min(abs(gamma[number]) - ((number + 1) * c2)**float(-1) * np.dot(gamma,c1))
+        result = result + a
+    return result
+print(f6())
 
-print(GAMMA())
+
+def BETA():
