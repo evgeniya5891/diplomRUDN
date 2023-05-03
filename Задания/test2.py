@@ -42,3 +42,43 @@ def f2():
     return list2
 print(f2())
 
+def f3():
+    list2 = []
+    for number in range(0,n):
+        a = c1[number] * (c2[number] - c1[number])**float(-1) * c2[number]
+        list2.append(a)
+    list2 = np.array(list2)
+    return list2
+print(f3())
+
+def f4():
+    list2 = []
+    for number in range(0,n):
+        a = c1[number] + c2[number]
+        list2.append(a)
+    list2 = np.array(list2)
+    return list2
+print(f4())
+
+def f5():
+    list2 = []
+    for number in range(0,n):
+        a = c1[number] - c2[number]
+        list2.append(a)
+    list2 = np.array(list2)
+    return list2
+print(f5())
+
+
+
+def GAMMA():
+    list2 = []
+    for number in range(0,n):
+        a = abs((n*(f4())**(-1/1)) * np.dot(gamma,f3())[number]) - ((a + b**2)*f3()[number]) / b * (a**2 + b**2)**1/2 * ((f4()**2)[number])**-1/2
+        list2.append(a)
+    list2 = np.array(list2)
+    return max(list2)
+print(GAMMA())
+
+
+
