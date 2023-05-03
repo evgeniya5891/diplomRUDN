@@ -1,4 +1,3 @@
-
 import numpy as np
 
 c1 = [3, 5, 6, 8] # n мерные вектора можно поменять цифры
@@ -15,7 +14,7 @@ y = np.array(y)
 
 
 p = [3, 5, 6, 8] #вектор
-n = 2
+n = 10
 # m <= n m - длинна векторов D и S
 gamma = [3, 5, 6, 8] #гамма вектор переименовать
 a = 1000 # не нашли описание
@@ -73,11 +72,30 @@ def Si(p):
     return Si
 print(Si(p))
 
-
 # проверить утверждение 11 и 12 . В. Арутюнов, Н. Г. Павлова, А. А. Шананин 11 , 12 стр
 # найти пару примеров удовлетворяющие этим условиям и проверить их
 # варировать одно из переменных и посмотреть как это влияет на точку рановесия сделать выводу
 
+
+def summ_check_c2():
+    result3 = 0
+    for number in range(n):
+        result3 = np.array(result3)
+        result3 = result3 + gamma * c2
+    return result3
+
+def summ_check_c1():
+    result4 = 0
+    for number in range(n):
+        result4 = np.array(result4)
+        result4 = result4 + gamma * c1
+    return result4
+
+
+
+def check_app():
+    if n + 1 / 2*b**2 * min((c2 - c1)/c1) < 2*n*((max(c1*((c2 - c1)**-1)*c2*(summ_check_c2())))**-1) * max(c1 / (c2 - c1)) * summ_check1() * summ_check2() - ((n+1)/n*(max(c2)*max(c1)**-2)*(max(c1/(c2-c1)))**-1 * summ_check_c1()
+        print('проверка прошла')
 
 
 
