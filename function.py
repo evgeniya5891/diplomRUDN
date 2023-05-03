@@ -47,32 +47,15 @@ print(rhu_x(x,y))
 #  Ди и си могут вернуть м мерный векторн рассмотреть случаи где м = н и м<н нашли равновесие на часть товаров
 
 
-def summ_Di(gamma, p):
-    result = 0
-    for number in range(n):
-        result = np.array(result)
-        result = result + (gamma * p)
-    return result
-print(summ_Di(gamma,p))
+def D(p):# должен получиться вектор N мерный
+    d = 1 / (n * p) * np.dot(gamma,p) # А. В. Арутюнов, Н. Г. Павлова, А. А. Шананин 11 стр
+    return d
+print(D(p))
 
-def Di(p):# должен получиться вектор  мерный
-    Di = 1 / (n * p) * summ_Di(gamma, p) # А. В. Арутюнов, Н. Г. Павлова, А. А. Шананин 11 стр
-    return Di
-print(Di(p))
-
-def summ_Si(p):# должен получиться вектор н мерный
-    result2 = 0
-    for number in range(n):
-        result2 = np.array(result2)
-        result2 = result2 + p**2
-    return result2
-print(summ_Si(p))
-
-def Si(p):
-    Si = (((a + (b ** 2)) * p)/(b * ((a**2 + b**2)**0.5))) * (summ_Si(p)**(-1/2)) - 1/n**0.5 # А. В. Арутюнов, Н. Г. Павлова, А. А. Шананин 11 стр
-    return Si
-print(Si(p))
-
+def S(p):
+    S= (((a + (b ** 2)) * p)/(b * ((a**2 + b**2)**0.5))) * (np.dot(2,p)**(-1/2)) - 1/n**0.5 # А. В. Арутюнов, Н. Г. Павлова, А. А. Шананин 11 стр
+    return S
+print(S(p))
 
 # проверить утверждение 11 и 12 . В. Арутюнов, Н. Г. Павлова, А. А. Шананин 11 , 12 стр
 # найти пару примеров удовлетворяющие этим условиям и проверить их
