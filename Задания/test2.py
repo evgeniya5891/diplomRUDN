@@ -31,7 +31,7 @@ def f1():
         list1.append(a)
     list1 = np.array(list1)
     return list1
-print(f1())
+# print(f1())
 
 def f2():
     list2 = []
@@ -40,7 +40,7 @@ def f2():
         list2.append(a)
     list2 = np.array(list2)
     return list2
-print(f2())
+# print(f2())
 
 def f3():
     list2 = []
@@ -49,7 +49,7 @@ def f3():
         list2.append(a)
     list2 = np.array(list2)
     return list2
-print(f3())
+# print(f3())
 
 def f4():
     list2 = []
@@ -58,7 +58,7 @@ def f4():
         list2.append(a)
     list2 = np.array(list2)
     return list2
-print(f4())
+# print(f4())
 
 def f5():
     list2 = []
@@ -67,7 +67,7 @@ def f5():
         list2.append(a)
     list2 = np.array(list2)
     return list2
-print(f5())
+# print(f5())
 
 def f6():
     result = 0
@@ -75,7 +75,7 @@ def f6():
         a = min(abs(gamma[number]) - ((number + 1) * c2)**float(-1) * np.dot(gamma,c1))
         result = result + a
     return result
-print(f6())
+# print(f6())
 
 
 
@@ -87,19 +87,20 @@ def GAMMA():
     list2 = np.array(list2)
     return max(list2)
 
-print(GAMMA())
+# print(GAMMA())
 
 
 def ALFA():
     w =  2 * n * max(f3() * np.dot(gamma,c2))**float(-1) * max(f2()) * f6() * max(c1**2)*(np.dot(gamma,c2))**float(-2)
     return w
 
-print(ALFA())
+# print(ALFA())
 
 def BETA():
     a = (n + 1) / n * max(c2) * max(c1**float(-2)) * (max(f2()))**float(-1) * np.dot(gamma,c1) - (((n + 1) / 2*b**2) * min(f1()))
     return a
-print(BETA())
+# print(BETA())
+
 
 if GAMMA() < ALFA() - BETA() and ((n + 1) / 2 * b**2) * min(f1()) <  ALFA() - (n + 1) / n * max(c2) * max(c1**float(-2)) * (max(f2()))**float(-1) * np.dot(gamma,c1):
     print ('модель удовлетворяет условиям')
