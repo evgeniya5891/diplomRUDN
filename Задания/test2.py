@@ -1,7 +1,9 @@
 import numpy as np
 
-c1 = [3, 5] # n мерные вектора можно поменять цифры
-c2 = [4, 9]
+#c1 = [1, 2] c2 = [5, 6] n = 2 gamma = [0.0002, 0.0003] a = 0.1 b = 0.1
+
+c1 = [1, 2] # n мерные вектора можно поменять цифры
+c2 = [5, 6]
 
 c1 = np.array(c1)
 c2 = np.array(c2)
@@ -16,9 +18,9 @@ y = np.array(y)
 p = [3, 5] #вектор
 n = 2
 # m <= n m - длинна векторов D и S
-gamma = [3, 5] #гамма вектор переименовать
-a = 1000 # не нашли описание
-b = 1
+gamma = [0.0002, 0.0003] #гамма вектор переименовать
+a = 0.1 # не нашли описание
+b = 0.1
 
 p = np.array(p)
 gamma = np.array(gamma)
@@ -77,32 +79,46 @@ def f6():
     return result
 # print(f6())
 
+def f7():
+    a = ((n + 1) / 2 * b**2) * min(f1())
+    return a
+print(f7())
+
+def f8():
+    a = (n + 1) / n * max(c2) * max(c1**float(-2)) * (max(f2()))**float(-1) * np.dot(gamma,c1)
+    return a
+print(f8())
+
 
 
 def GAMMA():
     list2 = []
     for number in range(1,n+1):
-        w = abs((number*(f4()[number-1])**float(-1)) * np.dot(gamma,f4())) - ((a + b**2)*f4()[number-1]) / b * (a**2 + b**2)**1/2 * (np.dot(f4(),f4()))**float(-1/2) + 1/number**float(-1/2)
+        w = abs((number*(f4()[number-1])**float(-1)) * np.dot(gamma,f4())) - (((a + b**2)*f4()[number-1]) / b * (a**2 + b**2)**1/2) * (np.dot(f4(),f4()))**float(-1/2) + 1/number**float(-1/2)
         list2.append(w)
     list2 = np.array(list2)
     return max(list2)
 
-# print(GAMMA())
+print(GAMMA())
 
 
 def ALFA():
-    w =  2 * n * max(f3() * np.dot(gamma,c2))**float(-1) * max(f2()) * f6() * max(c1**2)*(np.dot(gamma,c2))**float(-2)
+    w =  2 * n * (max(f3() * np.dot(gamma,c2))**float(-1)) * max(f2()) * f6() * max(c1**2)*((np.dot(gamma,c2))**float(-2))
     return w
 
-# print(ALFA())
+print(ALFA())
 
 def BETA():
-    a = (n + 1) / n * max(c2) * max(c1**float(-2)) * (max(f2()))**float(-1) * np.dot(gamma,c1) - (((n + 1) / 2*b**2) * min(f1()))
+    a = f8() - f7()
     return a
-# print(BETA())
+print(BETA())
+
+def condition():
+    if GAMMA() < ALFA() - BETA() and f7() <  ALFA() - f8():
+        return True #'модель удовлетворяет условиям'
+    else:
+        return False #'модель НЕ удовлетворяет условиям'
+print(condition())
 
 
-if GAMMA() < ALFA() - BETA() and ((n + 1) / 2 * b**2) * min(f1()) <  ALFA() - (n + 1) / n * max(c2) * max(c1**float(-2)) * (max(f2()))**float(-1) * np.dot(gamma,c1):
-    print ('модель удовлетворяет условиям')
-else:
-    print('модель НЕ удовлетворяет условиям')
+#for i in
