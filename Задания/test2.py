@@ -7,8 +7,8 @@ import numpy as np
 #c1 = [1, 2] c2 = [10, 20] n = 2 gamma = [0.0002, 0.0003] a = 10000000000000000 b = 0.00000000000001 в таком случае условия выполняься, в обратном нет
 
 
-c1 = [1, 2] # n мерные вектора можно поменять цифры
-c2 = [10, 20]
+c1 = [1, 1] # n мерные вектора можно поменять цифры
+c2 = [2, 2]
 
 c1 = np.array(c1)
 c2 = np.array(c2)
@@ -23,9 +23,9 @@ y = np.array(y)
 p = [3, 5] #вектор
 n = 2
 # m <= n m - длинна векторов D и S
-gamma = [0.0002, 0.0003] #гамма вектор переименовать
-a = 0.01 # не нашли описание
-b = 0.01
+gamma = [0.1 , 0.1] #гамма вектор переименовать
+a = 0.1 # не нашли описание
+b = 0.1
 
 p = np.array(p)
 gamma = np.array(gamma)
@@ -70,7 +70,7 @@ def f4():
 def f5():
     list2 = []
     for number in range(0,n):
-        a = c1[number] - c2[number]
+        a = c2[number] - c1[number]
         list2.append(a)
     list2 = np.array(list2)
     return list2
@@ -79,13 +79,13 @@ def f5():
 def f6():
     result = 0
     for number in range(0,n):
-        a = min(abs(gamma[number]) - ((number + 1) * c2)**float(-1) * np.dot(gamma,c1))
+        a = min(abs(gamma - ((n * c2)**float(-1) * np.dot(gamma,c1))))
         result = result + a
     return result
-# print(f6())
+# print( f6())
 
 def f7():
-    a = ((n + 1) / 2 * b**2) * min(f1())
+    a = (n + 1) / (2 * (b**2)) * min(f1())
     return a
 print(f7())
 
