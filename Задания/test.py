@@ -8,9 +8,9 @@ c2 = np.array(c2)
 
 n = 2
 
-gamma = [0.1 , 0.1]
-a = 0.1
-b = 0.1
+gamma = [1 , 1]
+a = 1
+b = 2
 
 gamma = np.array(gamma)
 
@@ -39,7 +39,7 @@ def f3():
         list2.append(a)
     list2 = np.array(list2)
     return list2
-#print(f3())
+# print(f3())
 
 def f4():
     list2 = []
@@ -48,7 +48,7 @@ def f4():
         list2.append(a)
     list2 = np.array(list2)
     return list2
-# print(f4())
+#print(f4())
 
 def f5():
     list2 = []
@@ -65,7 +65,7 @@ def f6():
         a = min(abs(gamma - ((n * c2)**float(-1) * np.dot(gamma,c1))))
         result = result + a
     return result
-#print( f6())
+# print( f6())
 
 def f7():
     a = (n + 1) / (2 * (b**2)) * min(f1())

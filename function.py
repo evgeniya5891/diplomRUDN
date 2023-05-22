@@ -1,11 +1,19 @@
 
 import numpy as np
 
-c1 = [3, 5] # n мерные вектора можно поменять цифры
-c2 = [2, 9]
+c1 = [1, 1]
+c2 = [2, 2]
 
 c1 = np.array(c1)
 c2 = np.array(c2)
+
+n = 2
+
+gamma = [0.1 , 0.1]
+a = 0.1
+b = 0.1
+
+gamma = np.array(gamma)
 
 x = [3, 5]
 y = [2, 5]
@@ -15,10 +23,6 @@ y = np.array(y)
 
 
 p = [3, 5] #вектор
-n = 2
-gamma = [3, 5] #гамма вектор переименовать
-a = 1000 # не нашли описание
-b = 1
 
 p = np.array(p)
 gamma = np.array(gamma)
