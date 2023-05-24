@@ -14,6 +14,7 @@ a = 1
 b = 1
 p = [3, 5]
 x = [3, 5]
+x0 =list(x)
 y = [2, 5]
 alpha = 1#какое должно быть?
 
@@ -48,66 +49,89 @@ def rhu_x(x,y):#Критерий нашей проверки (7) в статье
 #print(rhu_x(x,y))
 
 
-n = 10
-c1 = np.zeros(n)
-c2 = np.ones(n)
-a = 0.5
-alpha = 0.75
-beta = 0.5
-delta = 1.0 - beta / alpha
-eps = 0.0001
+import numpy as np
 
-# Declare the necessary variables
-x0 = np.zeros(n)
-xk = x0
-xknext = np.zeros(n)
-directions = np.zeros(n)
-h = np.zeros(n)
-z = np.zeros(n)
-mindist = rhu_y(D(xk) + a, S(xk))
-distance = rhu_y(D(xk) + a, S(xk))
+import random
 
-itercount = 0
 
-while rhu_y(D(xk) + a, S(xk)) > eps:
-    toolong = 0
-    itercount += 1
-    found = False
-    h = (c2 - c1) * (2 * alpha) ** (-1) * D(xk) + a, S(xk)
+def overlappoints_random_search(x0):
+    global delta
 
-    while not found:
-        toolong += 1
-        z = np.random.rand(n)
-        xknext = xk + h * (-1 + 2 * z)
+    n = len(x0)
+    xk = np.array(x0, dtype=np.float64)
+    directions = np.zeros(n, dtype=np.float64)
 
-        for j in range(n):
-            if xknext[j] > c2[j]:
-                xknext[j] = c2[j]
-            if xknext[j] < c1[j]:
-                xknext[j] = c1[j]
+    mindist = rhu_y(D(xk) + a, S(xk))
+    distance = rhu_y(D(xk) + a, S(xk))
 
-        print(f'{xknext}')
+    itercount = 0
 
-        if toolong == 100:
-            print('too long.')
-            break
+    print('delta = ', delta)
 
-        if rhu_y(D(xk) + a, S(xk)) <= delta * distance:
-            distance = rho_y(Psi(xknext) + a, Phi(xknext))
-            found = True
-            delta = 1.0 - beta / alpha
-            toolong = 0
-            xk = xknext
+    while rhu_y(D(xk) + a, S(xk)) > eps:
+        toolong = 0
+        itercount += 1
+        print('---------')
+        print('Starting iteration # ', itercount)
+        print('Current distance between the functions is:')
+        print('{:.8f}'.format(rhu_y(D(xk) + a, S(xk))))
+        found = False
+        h = (c2 - c1) * ((2 * alpha) ** (-1)) * rhu_y(D(xk) + a, S(xk))
+        print('Current seek radius is:')
+        print('{:.8f} {:.8f}'.format(h))
+        print('On this step, the condition is:')
+        print('{:.8f}'.format(delta * rhu_y(D(xk) + a, S(xk))))
+
+        while not found:
+            toolong += 1
+            z = np.random.random(n)
+            xknext = xk + h * (-1 + 2 * z)
+            xknext = np.clip(xknext, c1, c2)
+            print(xknext)
+
+            if toolong == 100:
+                print('Too long.')
+                return
+
+            if rhu_y(D(xknext) + a, S(xk)) <= delta * distance:
+                distance = rhu_y(D(xknext) + a, S(xknext))
+                found = True
+                print('%%%%%%%%%%%%%%%%%%%%%%%')
+                print('Found!')
+                print('xknext: {:.5f} {:.5f}'.format(xknext[0], xknext[1]))
+                delta = 1.0 - beta / alpha
+                print('toolong:', toolong)
+                toolong = 0
+                print('The condition satisfied with distance:')
+                print('{:.8f}'.format(rhu_y(D(xknext) + a, S(xk))))
+                print('New distance between the functions:')
+                print('{:.8f}'.format(distance))
+                xk = xknext
+            else:
+                pass  # R = R + rho_x(xknext,xk)
+
+        if not found:
+            print('Fail.')
+            print('Minimal distance found is: {:.5f}'.format(mindist))
+            return
         else:
-            pass
+            print('New point: {:.8f} {:.8f}'.format(xk[0], xk[1]))
+            print('The distance between the functions equals: {:.8f}'.format(rhu_y(D(xk) + a, S(xk))))
 
-    if not found:
-        print('Fail.')
-        print('Minimal distance found is:')
-        print(f'{mindist:12.5f}')
-        break
-    else:
-        print('New point:')
-        print(f'{xk:20.8f}')
-        print('The distance between the functions equals:')
-        print(f'{rho_y(Psi(xk) + a, Phi(xk)):12.8f}')
+    print('')
+    print('--------------------------------')
+    print('')
+    print('Coincidence point: {:.8f} {:.8f}'.format(xknext[0], xknext[1]))
+    print('The distance between the functions equals: {:.8f}'.format(rhu_y(D(xknext) + a, S(xknext))))
+    print('This was made in {} steps.'.format(itercount))
+    print('')
+    print('')
+    print('')
+    print('Solution is', xknext)
+    print('')
+    print('')
+    print('')
+    print('The approx distance: {:.8f}'.format(rhu_y(D(xknext) + a, S(xknext))))
+
+    return
+print(overlappoints_random_search(x0))
