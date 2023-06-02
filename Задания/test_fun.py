@@ -3,27 +3,28 @@
 # y - бюджет( задаем сами )
 # a - критерии модели, прописываем вручную
 # b - критерии модели, прописываем вручную
+# убрать все +а
 
 import numpy as np
 
-c1 = [1, 1]
-c2 = [5, 5]
+c1 = [7.08216914, 2.9375804]
+c2 = [0.37248224, 2.90394144]
 n = 2
-gamma = [0.01 , 0.01]
+gamma = 0.4616454589321557
 a = 1
 b = 1
 p = [3, 5]
 x = [3, 5]
 y = [2, 5]
-alpha = 1#какое должно быть?
-eps = 0.00001 #какое должно быть?
-delta = 1#какое должно быть?
-x0 = [1, 2] #каким должен быть?
-beta = 1#каким должен быть?
-xk = x0
+alpha = 29.59935772273932
+beta = -1.0866962164006442
+eps = 0.001
+delta = delta = 1.0 - beta / alpha#какое должно быть?из статьи арутюнова 1 -
 
-xk = np.array(xk)
-x0 = np.array(x0)
+
+
+
+
 x = np.array(x)
 y = np.array(y)
 p = np.array(p)
@@ -31,7 +32,10 @@ c1 = np.array(c1)
 c2 = np.array(c2)
 gamma = np.array(gamma)
 
-
+x0 = (c1 + c2)/2
+xk = x0
+xk = np.array(xk)
+x0 = np.array(x0)
 
 def D(p):# должен получиться вектор N мерный
     d = 1 / (n * p) * np.dot(gamma,p)
@@ -62,20 +66,20 @@ def Overlappoints_random_search(x0):
     delta = 1.0 - beta / alpha
     xk = x0
     directions = np.zeros(len(x0))
-    mindist = rhu_y(D(xk) + a, S(xk))
-    distance = rhu_y(D(xk) + a, S(xk))
+    mindist = rhu_y(D(xk), S(xk))
+    distance = rhu_y(D(xk), S(xk))
     itercount = 0
+    toolong = 0
 
-    while rhu_y(D(xk) + a, S(xk)) > eps:
-        toolong = 0
+    while rhu_y(D(xk), S(xk)) > eps:
         itercount += 1
-        print('Starting iteration # ', itercount)
-        print('Current distance between the functions is:', rhu_y(D(xk) + a, S(xk)))
+        print('Начальная итерация # ', itercount)
+        print('Текущее расстояние между функциями равно:', rhu_y(D(xk), S(xk)))
 
         found = False
-        h = (c2 - c1) * (2 * alpha) ** (-1) * rhu_y(D(xk) + a, S(xk))
-        print('Current seek radius is:', h)
-        print('On this step, the condition is:', delta * rhu_y(D(xk) + a, S(xk)), delta * rhu_y(D(xk) + a, S(xk)))
+        h = (c2 - c1) * (2 * alpha) ** (-1) * rhu_y(D(xk), S(xk))
+        print('Текущий радиус поиска равен:', h)# радиус поиска
+        print('На этом шаге условие таково:', delta * rhu_y(D(xk), S(xk)), delta * rhu_y(D(xk), S(xk)))
 
         while found == False:
 
@@ -88,27 +92,26 @@ def Overlappoints_random_search(x0):
                 if xknext[j] > c2[j]:
                     xknext[j] = c2[j]
                 if xknext[j] < c1[j]:
-                    xknext[j] = c1[j]
+                    xknext[j] = c1[j]# исменить код
 
             print(xknext)
 
-            if toolong == 100:
-                print('too long.')
+            if toolong == 100:#vj;yj gjvtyznm yf 100000
+                print(toolong)
                 break
-            delta = 1.0 - beta / alpha
 
-            if (rhu_y(D(xknext) + a, S(xk)) <= delta * distance):
 
-                distance = rhu_y(D(xknext) + a, S(xknext))
+            if (rhu_y(D(xknext), S(xk)) <= delta * distance):
+
+                distance = rhu_y(D(xknext), S(xknext))
                 found = True
-                print('Found!',xknext)
+                print('Найден!',xknext)
 
                 delta = 1.0 - beta / alpha
 
                 print('toolong: ', toolong)
-                toolong = 0
-                print('The condition satisfied with distance:', rhu_y(D(xknext) + a, S(xk)))
-                print('New distance between the functions:', distance)
+                print('Условие, удовлетворяемое расстоянием:', rhu_y(D(xknext), S(xk)))
+                print('Новое расстояние между функциями:', distance)
                 xk = xknext
                 print('xknext:', xknext)
 
@@ -117,17 +120,17 @@ def Overlappoints_random_search(x0):
                 pass
 
         if not found:
-            print('Minimal distance found is: ', mindist)
+            print('Минимальное найденное расстояние равно: ', mindist)
             return
         else:
-            print('New point:',xk)
-            print('The distance between the functions equals:',rhu_y(D(xk) + a, S(xk)))
+            print('Новая точка:',xk)
+            print('Расстояние между функциями равно:',rhu_y(D(xk), S(xk)))
 
-    print('Coincidence point:', xknext)
-    print('The distance between the functions equals:', rhu_y(D(xknext) + a, S(xknext)))
-    print('This was made in ', itercount, ' steps.')
-    print('Solution is', xknext)
-    print('The approx distance: ', rhu_y(D(xknext) + a, S(xknext)))
+    print('Точка совпадения:', xknext)
+    print('Расстояние между функциями равно:', rhu_y(D(xknext), S(xknext)))
+    print('Это было сделано в ', itercount, ' шагах.')
+    print('Решение', xknext)
+    print('Приблизительное расстояние: ', rhu_y(D(xknext), S(xknext)))
 
     return
 

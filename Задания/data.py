@@ -110,27 +110,25 @@ print(condition())
 
 # функции f1, f2, f3, f4, f5, f6, f7, f8, GAMMA, ALFA, BETA, condition определены выше
 
-n = 2
+n = 1
 
 while True:
     c1 = np.random.uniform(low=0.1, high=10.0, size=n) # генерируем случайные числа в диапазоне от 0.1 до 10.0
     c2 = np.random.uniform(low=0.1, high=10.0, size=n)
     gamma = np.random.uniform(low=0.01, high=1.0, size=n)
-    alpha = f7() + np.random.uniform(low=0.1, high=1.0)
-    beta = f8() - np.random.uniform(low=0.1, high=1.0)
+    alpha = f7()
+    beta = f8()
     gamma_max = GAMMA()
     alpha_val = ALFA()
     beta_val = BETA()
 
-    if gamma_max < alpha_val - beta_val and alpha < alpha_val - beta:
+    if gamma_max < alpha_val - beta_val and alpha < alpha_val - beta and c1 < c2:
         # записываем найденный набор в файл
         with open('solution.txt', 'w') as f:
             f.write(f'c1: {c1}\n')
             f.write(f'c2: {c2}\n')
-            f.write(f'gamma: {gamma}\n')
-            f.write(f'alpha: {alpha}\n')
-            f.write(f'beta: {beta}\n')
-            f.write(f'gamma_max: {gamma_max}\n')
-            f.write(f'alpha_val: {alpha_val}\n')
-            f.write(f'beta_val: {beta_val}\n')
+            f.write(f'gamma: {gamma_max}\n')
+            f.write(f'alpha: {alpha_val}\n')
+            f.write(f'beta: {beta_val}\n')
+            f.write(f'n: {n}\n')
         break
